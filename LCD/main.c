@@ -1,14 +1,14 @@
-#include "stm32f407xx.h"
-
+#include "LCD.h"
 
 void delay(void)
 	{
 		uint32_t i=0;
 		for(i=0; i < 5000000;i++);
 }
-	
+
 int main(void)
 {
+	//GPIO_INIT(GPIOA, 0);
 // Enable the GPIO Clock for GPIO
 	RCC->AHB1ENR |= (1 << 3);
 	RCC->AHB1ENR |= (1 << 0);
@@ -27,9 +27,11 @@ int main(void)
 	GPIOA->PUPDR = 0;
 	// Turn on the LEDs (BSRR)
 	GPIOD->BSRR = (1 << 10); //test LED
-	GPIOA->BSRR = 0b1111111111; //8 LEDs simulation data input to LCD
+	LCDPrintChar(GPIOA, 4, 'A');
+	//GPIOA->BSRR = 0b1111111111; //8 LEDs simulation data input to LCD
 while(1)
 {
 
 }
 }
+
