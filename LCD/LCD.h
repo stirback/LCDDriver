@@ -20,7 +20,7 @@
 #define GPIODATAPIND6 6 //Pin for D6 data 
 #define GPIODATAPIND7 7 //Pin for D7 data 
 
-#define GPIOCOMMAND GPIOD //GPIO port for enable, R/W and RS
+#define GPIOCOMMAND GPIOB //GPIO port for enable, R/W and RS
 #define ENABLEPIN 0 //Pin for Enable on LCD
 #define RWPIN 1 //Pin for reading and writing on LCD
 #define RSPIN 2 //Pin for Register select on LCD
