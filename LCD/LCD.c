@@ -77,7 +77,8 @@ void LCDClear(){
 
 void LCDInit(){
 	LCDSendCommand(0b00111000); //Function Set
-  LCDSendCommand(0b00000001); //Clear
+  LCDClear();
   LCDSendCommand(0b00000110); //Increment and shift cursor
 	LCDSendCommand(0b00001110); //Turn on display
+	LCDClear();
 }

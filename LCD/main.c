@@ -26,9 +26,10 @@ int main(void)
 	LCDInit();
 	//Writing Letter A (01000001);
 	LCDClear();
-	LCDPrintString("ABCDEFGHIJKLMNO");
+	LCDPrintString("123456789ABCDEF");
   LCDSendCommand(0b11000000); //Function Set
-	LCDPrintString("1234567890");
+	LCDPrintString("OLEGstrBAC");
+	
 while(1)
 {
 	
