@@ -10,7 +10,7 @@
 #define D6 0b01000000
 #define D7 0b10000000
 
-#define GPIODATA GPIOA 	//GPIO port to use for data
+#define GPIODATA GPIOC 	//GPIO port to use for data
 #define GPIODATAPIND0 0 //Pin for D0 data 
 #define GPIODATAPIND1 1 //Pin for D1 data 
 #define GPIODATAPIND2 2 //Pin for D2 data 
@@ -20,7 +20,7 @@
 #define GPIODATAPIND6 6 //Pin for D6 data 
 #define GPIODATAPIND7 7 //Pin for D7 data 
 
-#define GPIOCOMMAND GPIOB //GPIO port for enable, R/W and RS
+#define GPIOCOMMAND GPIOA //GPIO port for enable, R/W and RS
 #define ENABLEPIN 0 //Pin for Enable on LCD
 #define RWPIN 1 //Pin for reading and writing on LCD
 #define RSPIN 2 //Pin for Register select on LCD
@@ -30,8 +30,10 @@
 void LCDSetPin(GPIO_TypeDef *GPIO, uint32_t pin, char passedchar, uint8_t port);
 void LCDPrintCharPins(char chartoprint);
 void LCDPrintChar(char chartoprint);
+void LCDPrintString(char* string);
 void LCDSendCommand(char commmand);
 void LCDInit(void);
+void LCDClear(void);
 void Delay(int time);
 #endif
 

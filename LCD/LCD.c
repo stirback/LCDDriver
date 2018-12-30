@@ -19,8 +19,8 @@ void LCDPrintCharPins(char chartoprint){
 	LCDSetPin(GPIODATA, GPIODATAPIND5, chartoprint, D5);
 	LCDSetPin(GPIODATA, GPIODATAPIND6, chartoprint, D6);
 	LCDSetPin(GPIODATA, GPIODATAPIND7, chartoprint, D7);
-	GPIOCOMMAND->BSRR = (1 << (ENABLEPIN+16)); //Reset Enable (0)
-	Delay(500);
+  GPIOCOMMAND->BSRR = (1 << (ENABLEPIN+16)); //Reset Enable (0)
+	Delay(8000);
 };
 
 void Delay(int time){
@@ -45,8 +45,9 @@ void LCDCommandMode(){
 }
 
 void LCDEnable(){
+	Delay(8000);
 	GPIOCOMMAND->BSRR = (1 << ENABLEPIN); //Set Enable (1)
-	Delay(500);
+
 }
 
 void LCDPrintChar(char c){
@@ -56,6 +57,13 @@ void LCDPrintChar(char c){
 	LCDPrintCharPins(c);
 }
 
+void LCDPrintString(char* string){
+	char* temp = string;
+	while(*temp != 0){
+		LCDPrintChar(*temp++);
+	}
+}
+
 void LCDSendCommand(char command){
 	LCDCommandMode();
 	LCDWriteMode();
@@ -63,9 +71,13 @@ void LCDSendCommand(char command){
 	LCDPrintCharPins(command);
 }
 
+void LCDClear(){
+	LCDSendCommand(0b00000001); //Clear
+}
+
 void LCDInit(){
 	LCDSendCommand(0b00111000); //Function Set
-	LCDSendCommand(0b00001111); //Turn on display
-	LCDSendCommand(0b00000001); //Clear
-	LCDSendCommand(0b00000110); //Increment and shift cursor
+  LCDSendCommand(0b00000001); //Clear
+  LCDSendCommand(0b00000110); //Increment and shift cursor
+	LCDSendCommand(0b00001110); //Turn on display
 }
