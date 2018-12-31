@@ -25,6 +25,9 @@
 #define RWPIN 1 //Pin for reading and writing on LCD
 #define RSPIN 2 //Pin for Register select on LCD
 
+#define BITMODE8 0
+#define BITMODE4 1
+
 #include "stm32f407xx.h"
 
 void LCDSetPin(GPIO_TypeDef *GPIO, uint32_t pin, char passedchar, uint8_t port);
@@ -32,8 +35,15 @@ void LCDPrintCharPins(char chartoprint);
 void LCDPrintChar(char chartoprint);
 void LCDPrintString(char* string);
 void LCDSendCommand(char commmand);
-void LCDInit(void);
+void LCDInit(uint32_t bittype);
+void LCDCommandMode(void);
+void LCDDataMode(void);
+void LCDWriteMode(void);
+void LCDReadMode(void);
+void LCDResetCursor(void);
+void LCDEnable(void);
 void LCDClear(void);
+void LCDSecondLine(void); //Second Line
 void Delay(int time);
 #endif
 

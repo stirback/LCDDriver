@@ -23,12 +23,14 @@ int main(void)
 	
 	// Turn on the LEDs (BSRR)
 	//GPIOD->BSRR = (1 << 10); //test LED
-	LCDInit();
+	LCDInit(BITMODE8);
 	//Writing Letter A (01000001);
-	LCDClear();
-	LCDPrintString("123456789ABCDEF");
-  LCDSendCommand(0b11000000); //Function Set
-	LCDPrintString("OLEGstrBAC");
+	LCDPrintChar('O');
+	LCDPrintChar('L');
+	LCDPrintChar('E');
+	LCDPrintChar('G');
+	LCDSecondLine();
+	LCDPrintString("STRBAC");
 	
 while(1)
 {
