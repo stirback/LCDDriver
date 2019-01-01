@@ -30,6 +30,8 @@ int main(void)
 	LCDPrintChar('E');
 	LCDPrintChar('G');
 	LCDSecondLine();
+//	LCDCursorRight(); //bad
+//	LCDCursorLeft(); //bad
 	LCDPrintString("STRBAC");
 	
 while(1)

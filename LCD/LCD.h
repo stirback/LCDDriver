@@ -41,6 +41,10 @@ void LCDDataMode(void);
 void LCDWriteMode(void);
 void LCDReadMode(void);
 void LCDResetCursor(void);
+void LCDCursorRight(void);
+void LCDCursorLeft(void);
+void LCDDisplayRight(void);
+void LCDDisplayLeft(void);
 void LCDEnable(void);
 void LCDClear(void);
 void LCDSecondLine(void); //Second Line

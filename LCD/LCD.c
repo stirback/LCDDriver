@@ -23,9 +23,9 @@ void LCDPrintCharPins(char chartoprint){
 		LCDSetPin(GPIODATA, GPIODATAPIND6, chartoprint, D6);
 		LCDSetPin(GPIODATA, GPIODATAPIND7, chartoprint, D7);
 		GPIOCOMMAND->BSRR = (1 << (ENABLEPIN+16)); //Reset Enable (0)
-	  Delay(1000);
+	  Delay(1500);
 	}
-	else{ //4 BIT MODE IS SET //0b00101000
+	else{ //4 BIT MODE IS SET
 		LCDSetPin(GPIODATA, GPIODATAPIND7, chartoprint, D7);
 		LCDSetPin(GPIODATA, GPIODATAPIND6, chartoprint, D6);
 		LCDSetPin(GPIODATA, GPIODATAPIND5, chartoprint, D5);
@@ -64,7 +64,7 @@ void LCDCommandMode(){
 }
 
 void LCDEnable(){
-	Delay(1000);
+	Delay(1500);
 	GPIOCOMMAND->BSRR = (1 << ENABLEPIN); //Set Enable (1)
 }
 
@@ -99,6 +99,22 @@ void LCDSecondLine(){
 
 void LCDResetCursor(){
 	LCDSendCommand(0b00000010); //Set 
+}
+
+void LCDCursorRight(){
+	LCDSendCommand(0x14); //Move Right 
+}
+
+void LCDCursorLeft(){
+	LCDSendCommand(0b00010000); //Move left
+}
+
+void LCDDisplayRight(){
+	LCDSendCommand(0b00011100); //Move Display Right
+}
+
+void LCDDisplayLeft(){
+	LCDSendCommand(0b00011000); //Move Display Left
 }
 
 void LCDInit(uint32_t bittype){
