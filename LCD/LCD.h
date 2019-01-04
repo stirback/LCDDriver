@@ -25,29 +25,29 @@
 #define RWPIN 1 //Pin for reading and writing on LCD
 #define RSPIN 2 //Pin for Register select on LCD
 
-#define BITMODE8 0
-#define BITMODE4 1
+#define BITMODE8 0 //8 bit mode
+#define BITMODE4 1 //4 bit mode
 
 #include "stm32f407xx.h"
 
-void LCDSetPin(GPIO_TypeDef *GPIO, uint32_t pin, char passedchar, uint8_t port);
-void LCDPrintCharPins(char chartoprint);
-void LCDPrintChar(char chartoprint);
-void LCDPrintString(char* string);
-void LCDSendCommand(char commmand);
-void LCDInit(uint32_t bittype);
-void LCDCommandMode(void);
-void LCDDataMode(void);
-void LCDWriteMode(void);
-void LCDReadMode(void);
-void LCDResetCursor(void);
-void LCDCursorRight(void);
-void LCDCursorLeft(void);
-void LCDDisplayRight(void);
-void LCDDisplayLeft(void);
-void LCDEnable(void);
-void LCDClear(void);
-void LCDSecondLine(void); //Second Line
-void Delay(int time);
+void LCDSetPin(GPIO_TypeDef *GPIO, uint32_t pin, char passedchar, uint8_t port); //Sets pins to high or low
+void LCDPrintCharPins(char chartoprint); //Processes each command or data input
+void LCDPrintChar(char chartoprint); //Prints a character to the LCD
+void LCDPrintString(char* string); //Prints a string to the LCD
+void LCDSendCommand(char commmand); //Send command to LCD
+void LCDInit(uint32_t bittype); //Initilizion of LCD driver
+void LCDCommandMode(void); //Sets LCD to recieve commands
+void LCDDataMode(void); //Sets LCD to recieve Data
+void LCDWriteMode(void); //Sets LCD to write data/commands
+void LCDReadMode(void); //Sets LCD to read data
+void LCDResetCursor(void); //Reset cursor to initial position
+void LCDCursorRight(void); //Moves cursor right by one
+void LCDCursorLeft(void); //Moves cursor left by one
+void LCDDisplayRight(void); //Shifts whole display to the right by one
+void LCDDisplayLeft(void); //Shifts whole display to the left by one
+void LCDEnable(void); //Enables LCD to recieve commands or data
+void LCDClear(void); //Clears the Display
+void LCDSecondLine(void); //Moves LCD to second line
+void Delay(int time); //Delay for setup
 #endif
 

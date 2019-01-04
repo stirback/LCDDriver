@@ -1,44 +1,44 @@
 #include "LCD.h"
 
-static uint32_t BitFlag  = 0; 
+static uint32_t BitFlag  = 0; //Check if 8 or 4 bit mode
 
 void LCDSetPin(GPIO_TypeDef *GPIO, uint32_t pin, char passedchar, uint8_t port){
 	
-	if((passedchar & port) != 0){
-		GPIO->BSRR = (1 << pin);
+	if((passedchar & port) != 0){ //Check if value is high
+		GPIO->BSRR = (1 << pin); //Set Pin
 	}
 	else{
-		GPIO->BSRR = (1 << (pin+16));
+		GPIO->BSRR = (1 << (pin+16)); //Reset Pin
 	}
 }
 
 void LCDPrintCharPins(char chartoprint){
 	if(BitFlag  == 0){
-		LCDSetPin(GPIODATA, GPIODATAPIND0, chartoprint, D0);
-		LCDSetPin(GPIODATA, GPIODATAPIND1, chartoprint, D1);
-		LCDSetPin(GPIODATA, GPIODATAPIND2, chartoprint, D2);
-		LCDSetPin(GPIODATA, GPIODATAPIND3, chartoprint, D3);
-		LCDSetPin(GPIODATA, GPIODATAPIND4, chartoprint, D4);
-		LCDSetPin(GPIODATA, GPIODATAPIND5, chartoprint, D5);
-		LCDSetPin(GPIODATA, GPIODATAPIND6, chartoprint, D6);
-		LCDSetPin(GPIODATA, GPIODATAPIND7, chartoprint, D7);
+		LCDSetPin(GPIODATA, GPIODATAPIND0, chartoprint, D0); //D7
+		LCDSetPin(GPIODATA, GPIODATAPIND1, chartoprint, D1); //D6
+		LCDSetPin(GPIODATA, GPIODATAPIND2, chartoprint, D2); //D5
+		LCDSetPin(GPIODATA, GPIODATAPIND3, chartoprint, D3); //D4
+		LCDSetPin(GPIODATA, GPIODATAPIND4, chartoprint, D4); //D3
+		LCDSetPin(GPIODATA, GPIODATAPIND5, chartoprint, D5); //D2
+		LCDSetPin(GPIODATA, GPIODATAPIND6, chartoprint, D6); //D1
+		LCDSetPin(GPIODATA, GPIODATAPIND7, chartoprint, D7); //D0
 		GPIOCOMMAND->BSRR = (1 << (ENABLEPIN+16)); //Reset Enable (0)
 	  Delay(1500);
 	}
 	else{ //4 BIT MODE IS SET
-		LCDSetPin(GPIODATA, GPIODATAPIND7, chartoprint, D7);
-		LCDSetPin(GPIODATA, GPIODATAPIND6, chartoprint, D6);
-		LCDSetPin(GPIODATA, GPIODATAPIND5, chartoprint, D5);
-		LCDSetPin(GPIODATA, GPIODATAPIND4, chartoprint, D4);
+		LCDSetPin(GPIODATA, GPIODATAPIND7, chartoprint, D7); //D7
+		LCDSetPin(GPIODATA, GPIODATAPIND6, chartoprint, D6); //D6
+		LCDSetPin(GPIODATA, GPIODATAPIND5, chartoprint, D5); //D5
+		LCDSetPin(GPIODATA, GPIODATAPIND4, chartoprint, D4); //D4
 		GPIOCOMMAND->BSRR = (1 << (ENABLEPIN+16)); //Reset Enable (0)
-	  Delay(1000);
+	  Delay(1500);
 	  LCDEnable();
-		LCDSetPin(GPIODATA, GPIODATAPIND7, chartoprint, D3);
-		LCDSetPin(GPIODATA, GPIODATAPIND6, chartoprint, D2);
-		LCDSetPin(GPIODATA, GPIODATAPIND5, chartoprint, D1);
-		LCDSetPin(GPIODATA, GPIODATAPIND4, chartoprint, D0);
+		LCDSetPin(GPIODATA, GPIODATAPIND7, chartoprint, D3); //D7
+		LCDSetPin(GPIODATA, GPIODATAPIND6, chartoprint, D2); //D6
+		LCDSetPin(GPIODATA, GPIODATAPIND5, chartoprint, D1); //D5
+		LCDSetPin(GPIODATA, GPIODATAPIND4, chartoprint, D0); //D4
 		GPIOCOMMAND->BSRR = (1 << (ENABLEPIN+16)); //Reset Enable (0)
-	  Delay(1000);
+	  Delay(1500);
 	}
 };
 
@@ -69,24 +69,24 @@ void LCDEnable(){
 }
 
 void LCDPrintChar(char c){
-	LCDDataMode();
-	LCDWriteMode();
-	LCDEnable();
-	LCDPrintCharPins(c);
+	LCDDataMode(); //Set LCD to read data
+	LCDWriteMode(); //Write to LCD
+	LCDEnable(); //Enable LCD
+	LCDPrintCharPins(c); //Print Character
 }
 
-void LCDPrintString(char* string){
+void LCDPrintString(char* string){ //Send string to LCD
 	char* temp = string;
 	while(*temp != 0){
-		LCDPrintChar(*temp++);
+		LCDPrintChar(*temp++); //Send one character at a time
 	}
 }
 
 void LCDSendCommand(char command){
-	LCDCommandMode();
-	LCDWriteMode();
-	LCDEnable();
-	LCDPrintCharPins(command);
+	LCDCommandMode(); //Set command mode
+	LCDWriteMode(); //Set write mode
+	LCDEnable(); //Enable LCD
+	LCDPrintCharPins(command); //Send command
 }
 
 void LCDClear(){
